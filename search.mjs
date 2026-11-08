@@ -91,7 +91,7 @@ export function buildIndex(tools) {
       const schemeMatch = [...requestedSchemes].some(scheme => doc.schemes.has(scheme));
       const objectMatch = schemeMatch || [...queryTerms].some(term => !actions.has(term) && doc.terms.has(term));
       const relevance = score + (actionMatch ? 6 : 0) + (schemeMatch ? 8 : 0);
-      return { tool: doc.tool, exact, actionMatch, objectMatch, score: relevance };
+      return { tool: doc.tool, exact, actionMatch, objectMatch, schemeMatch, score: relevance };
     }).sort((a, b) => Number(b.exact) - Number(a.exact) || b.score - a.score || a.tool.name.localeCompare(b.tool.name));
   }
 
@@ -99,7 +99,13 @@ export function buildIndex(tools) {
     if (!query || negation.test(query)) return;
     const requestedActions = new Set(words(query.replace(uriPattern, '')).filter(term => actions.has(term)));
     if (requestedActions.size !== 1) return;
-    const [first, second] = rank(query);
+    const candidates = rank(query);
+    const [uri, otherUri] = query.matchAll(uriPattern);
+    const explicitResourceRead = requestedActions.has('read') && uri && !otherUri &&
+      uri[0].length > uri[1].length + 3 && !/^(?:https?|file)$/i.test(uri[1]);
+    const [first, second] = explicitResourceRead
+      ? candidates.filter(candidate => candidate.actionMatch && candidate.schemeMatch)
+      : candidates;
     if (first && deferred(first.tool) && first.actionMatch && first.objectMatch &&
         first.score >= 4 && first.score >= (second?.score ?? 0) * 1.2) return first.tool.name;
   }

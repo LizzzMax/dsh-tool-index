@@ -1,6 +1,6 @@
 {
   "name": "dsh-tool-index",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Local keyword discovery and conservative tool preselection for DeepSeek Harness",
   "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/LizzzMax/dsh-tool-index.git" },

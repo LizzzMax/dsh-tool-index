@@ -11,7 +11,7 @@ Local tool discovery for DeepSeek Harness. The plugin builds a per-agent in-memo
 | Read a resource through MCP | 36,443 | 21,986 | 14,457 (39.7%) | 3 → 2 |
 | **Total** | **111,908** | **79,508** | **32,400 (29.0%)** | **9 → 7** |
 
-Each task ran once in each isolated profile using DSH `0.2.2-rc.1`, Web Standard, and `gpt-6.1-sol` at medium reasoning. Both profiles included OpenViking. The baseline used `dsh-tool-lazy-dispatcher` `1.2.0` with a local compatibility patch. Totals include input and output tokens, with cached input counted in the input total.
+Each task ran once in each isolated profile using DSH `0.2.2-rc.1`, Web Standard, and `gpt-6.1-sol` at medium reasoning. Both profiles included OpenViking. The comparison used Lean Context `0.1.0` and `dsh-tool-lazy-dispatcher` `1.2.0` with a local compatibility patch. Totals include input and output tokens, with cached input counted in the input total.
 
 For the MCP task, the prompt specified a resource URI and a reading goal. Lean Context preselected the reader, so the model called it directly and retrieved the expected value. In the file task, the baseline also spent one request on `pwd`, while Lean Context started with `glob`. Request counts can vary with the model's execution path.
 
@@ -19,7 +19,7 @@ For the MCP task, the prompt specified a resource URI and a reading goal. Lean C
 
 In DSH Web, open **Settings → Plugins → Add Plugin**, then paste the package URL from the [latest release](https://github.com/LizzzMax/dsh-tool-index/releases/latest). You can also install the downloaded `.tgz` or this source folder as a local package. Enable the `dsh-tool-index` bundle in your profile.
 
-Use one tool-disclosure bundle per profile. This bundle replaces the default native executor entry and delegates actual calls to DSH's native executor. The verified profile for `0.1.0` is DSH `0.2.2-rc.1` in Web Standard mode.
+Use one tool-disclosure bundle per profile. This bundle replaces the default native executor entry and delegates actual calls to DSH's native executor. The verified profile is DSH `0.2.2-rc.1` in Web Standard mode.
 
 The defaults defer `mcp__` tools and keep other tools visible. Override `deferredPrefixes` to include other tool families and `pinnedTools` to keep specific tools visible.
 
