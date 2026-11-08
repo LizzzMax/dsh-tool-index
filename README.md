@@ -2,6 +2,19 @@
 
 Local tool discovery for DeepSeek Harness. The plugin builds a per-agent in-memory keyword index from the tools admitted for the current step. It ranks names, descriptions, parameters, action aliases, and URI schemes. A clear action and object match can expose one deferred tool directly. Otherwise `dsh_search_tools` returns up to three candidates and `dsh_call_tool` invokes the chosen tool through DSH's normal executor and step admission.
 
+## Token benchmark
+
+| Task | Prior lazy dispatcher | DSH Lean Context | Tokens saved | Model requests |
+| --- | ---: | ---: | ---: | ---: |
+| Short reply with no tools | 11,835 | 10,741 | 1,094 (9.2%) | 1 → 1 |
+| Update six local files | 63,630 | 46,781 | 16,849 (26.5%) | 5 → 4 |
+| Read a resource through MCP | 36,443 | 21,986 | 14,457 (39.7%) | 3 → 2 |
+| **Total** | **111,908** | **79,508** | **32,400 (29.0%)** | **9 → 7** |
+
+Each task ran once in each isolated profile using DSH `0.2.2-rc.1`, Web Standard, and `gpt-6.1-sol` at medium reasoning. Both profiles included OpenViking. The baseline used `dsh-tool-lazy-dispatcher` `1.2.0` with a local compatibility patch. Totals include input and output tokens, with cached input counted in the input total.
+
+For the MCP task, the prompt specified a resource URI and a reading goal. Lean Context preselected the reader, so the model called it directly and retrieved the expected value. In the file task, the baseline also spent one request on `pwd`, while Lean Context started with `glob`. Request counts can vary with the model's execution path.
+
 ## Profile setup
 
 In DSH Web, open **Settings → Plugins → Add Plugin**, then paste the package URL from the [latest release](https://github.com/LizzzMax/dsh-tool-index/releases/latest). You can also install the downloaded `.tgz` or this source folder as a local package. Enable the `dsh-tool-index` bundle in your profile.
