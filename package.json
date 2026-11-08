@@ -1,13 +1,34 @@
 {
-  "name": "dsh-tool-index",
-  "version": "0.1.1",
+  "name": "dsh-lean-context",
+  "version": "0.1.2",
   "description": "Local keyword discovery and conservative tool preselection for DeepSeek Harness",
   "license": "MIT",
-  "repository": { "type": "git", "url": "git+https://github.com/LizzzMax/dsh-tool-index.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LizzzMax/dsh-tool-index.git"
+  },
   "type": "module",
   "main": "index.mjs",
-  "files": ["index.mjs", "search.mjs", "cordis.patch.yml"],
-  "engines": { "dsh": "0.2.2-rc.1" },
-  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
-  "scripts": { "test": "node --test test/*.test.mjs" }
+  "files": [
+    "index.mjs",
+    "search.mjs",
+    "cordis.patch.yml"
+  ],
+  "engines": {
+    "dsh": "0.2.2-rc.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "tool-search",
+    "mcp"
+  ]
 }

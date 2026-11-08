@@ -2,4 +2,4 @@
   disabled: true
 - insert:
     - id: tool-index
-      name: dsh-tool-index
+      name: dsh-lean-context

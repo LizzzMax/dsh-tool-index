@@ -17,7 +17,9 @@ For the MCP task, the prompt specified a resource URI and a reading goal. Lean C
 
 ## Profile setup
 
-In DSH Web, open **Settings → Plugins → Add Plugin**, then paste the package URL from the [latest release](https://github.com/LizzzMax/dsh-tool-index/releases/latest). You can also install the downloaded `.tgz` or this source folder as a local package. Enable the `dsh-tool-index` bundle in your profile.
+In DSH Web, open **Settings → Plugins → Add Plugin**, then paste the package URL from the [latest release](https://github.com/LizzzMax/dsh-tool-index/releases/latest). You can also install the downloaded `.tgz` or this source folder as a local package. Enable the `dsh-lean-context` bundle in your profile. In DSH Web you can also install by entering `dsh-lean-context` as the npm package name.
+
+For upgrades from a GitHub release through `0.1.1`, remove the old `dsh-tool-index` bundle before enabling `dsh-lean-context`.
 
 Use one tool-disclosure bundle per profile. This bundle replaces the default native executor entry and delegates actual calls to DSH's native executor. The verified profile is DSH `0.2.2-rc.1` in Web Standard mode.
 
