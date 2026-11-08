@@ -1,4 +1,4 @@
-# DSH Tool Index
+# DSH Lean Context
 
 Local tool discovery for DeepSeek Harness. The plugin builds a per-agent in-memory keyword index from the tools admitted for the current step. It ranks names, descriptions, parameters, action aliases, and URI schemes. A clear action and object match can expose one deferred tool directly. Otherwise `dsh_search_tools` returns up to three candidates and `dsh_call_tool` invokes the chosen tool through DSH's normal executor and step admission.
 
