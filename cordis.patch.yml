@@ -1,0 +1,5 @@
+- id: tool-executor-native
+  disabled: true
+- insert:
+    - id: tool-index
+      name: dsh-tool-index
